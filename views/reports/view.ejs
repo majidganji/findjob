@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard/index">صفحه اصلی</a></li>
+            <li><a href="/reports">گزارش شده</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<% if(typeof danger !== 'undefined' && danger.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-danger">
+            <ul class="show-message">
+                <% _.each(danger, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<% if(typeof success !== 'undefined' && success.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            <ul class="show-message">
+                <% _.each(success, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/reports/<%= model.id %>/delete" class="btn btn-danger" onclick="return confirm('آيا مطمئن هستید؟')">حذف</a>
+    </div>
+</div>
+<p></p>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>عنوان</th>
+                <td><%= model.title %></td>
+            </tr>
+            <tr>
+                <th>توضیحات</th>
+                <td><%= model.description %></td>
+            </tr>
+            <tr>
+                <th>آگهی</th>
+                <td><a href="/jobs/<%= model.job.id %>/view"><%= model.job.title %></a></td>
+            </tr>
+            <tr>
+                <th>وضعیت</th>
+                <td>
+                    <a href="/reports/<%= model.id %>/status"
+                       class="<%= model.status ? 'text-success' : 'text-danger' %>"><%= model.status ? 'بررسی شده' : 'بررسی نشده' %></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

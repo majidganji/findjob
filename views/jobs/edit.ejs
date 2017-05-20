@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">صفحه اصلی</a></li>
+            <li><a href="/jobs">آگهی ها</a></li>
+            <li><a href="/jobs/<%= model.id %>/view"><%= model.title %></a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <% if(errors && errors.length > 0){ %>
+        <div class="alert alert-danger">
+            <ul>
+                <% errors.forEach(function(item){ %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+        <% } %>
+        <form action="/jobs/<%= model.id %>/update" method="post">
+            <input type="hidden" name="_csrf" value="<%= _csrf %>">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="title">عنوان</label>
+                        <input type="text" name="title" id="title" class="form-control" value="<%= model.title %>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="city">شهر</label>
+                        <select name="city" id="city" class="form-control">
+                            <% city.forEach(function(item){ %>
+                            <option <%= model.city === item.id ? 'selected' : '' %>
+                                    value="<%= item.id %>"><%= item.name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="phone">تلفن</label>
+                        <input type="text" name="phone" id="phone" class="form-control" value="<%= model.phone %>">
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="email">پست الکترونیکی</label>
+                        <input type="text" name="email" id="email" class="form-control" value="<%= model.email %>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="category">دسته بندی</label>
+                        <select name="category" id="category" class="form-control">
+                            <% category.forEach(function(item){ %>
+                            <option <%= model.category === item.id ? 'selected' : '' %>
+                                    value="<%= item.id %>"><%= item.name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="description">توضیحات</label>
+                        <textarea rows="10" name="description" id="description"
+                                  class="tinymce form-control"><%= model.description %></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="active">فعال / غیر فعال</label>
+                        <input type="checkbox" name="active" id="active" <%= model.active ? 'checked' : '' %>>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="ذخیره" class="btn btn-success">
+                        <input type="reset" name="reset" value="لفو" class="btn btn-default">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

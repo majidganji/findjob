@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <% if(req.cookies.selectedcity){ %>
+            <li><a href="/"><%= req.cookies.selectedcity.name %></a></li>
+            <% }else{ %>
+                <li><a href="/">صفحه اصلی</a></li>
+            <% } %>
+            <li class="active"><%= jcategory.name %></li>
+        </ol>
+    </div>
+</div>
+<% if(success && success.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            <ul>
+                <% success.forEach(function(item){ %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<div class="row" id="content">
+    <% if (jobs && jobs.length > 0){ %>
+    <% jobs.forEach(function(item){ %>
+    <div class="col-sm-4">
+        <div class="well well-sm">
+            <a href="/detail/<%= item.slug %>/<%= item.id %>" class="link"><h5 class="title"><%= item.title %></h5>
+            </a>
+            <hr>
+            <div class="detail text-muted">
+                <p class="pull-right">
+                    <% if(req.cookies.selectedcity){ %>
+                    <%= req.cookies.selectedcity.name %>
+                    <% }else{ %>
+                    <%= item.city ? item.city.name : '' %>
+                    <% } %>
+                </p>
+                <p class="pull-left"><%= moment(item.createdAt, 'fa').fromNow() %></p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <% }) %>
+
+    <% }else{ %>
+    <div class="col-sm-12">
+        <div class="alert alert-warning">محتوایی وجود ندارد.</div>
+    </div>
+    <% } %>
+</div>
+<%- '<script>var maxPage = '+ count +';</script>' %>

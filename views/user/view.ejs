@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">صفحه اصلی</a></li>
+            <li><a href="/user">مدیریت کاربران</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/user/<%= model.id %>/edit" class="btn btn-warning">ویرایش</a>
+        <a href="/user/<%= model.id %>/delete" class="btn btn-danger" onclick="return confirm('آيا مطمئن هستید؟')">حذف</a>
+    </div>
+</div>
+<p></p>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>نام</th>
+                <td><%= model.name %></td>
+            </tr>
+            <tr>
+                <th>نام کاربری</th>
+                <td><%= model.username %></td>
+            </tr>
+            <tr>
+                <th>پست الکترونیکی</th>
+                <td><%= model.email %></td>
+            </tr>
+            <tr>
+                <th>وضعیت</th>
+                <td><%= model.status === '10' ? 'مدیر کل' : (model.status === '9' ? 'مدیر' : 'غیر فعال') %></td>
+            </tr>
+            <tr>
+                <th>زمان ثبت نام</th>
+                <td><%= moment(model.createdAt, 'fa').fromNow() %></td>
+            </tr>
+            <tr>
+                <th>آخرین بروزرسانی</th>
+                <td><%= moment(model.updatedAt, 'fa').fromNow() %></td>
+            </tr>
+        </table>
+    </div>
+</div>

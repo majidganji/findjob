@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard/index">صفحه اصلی</a></li>
+            <li><a href="/categories">دسته‌بندی</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/categories/<%= category.id %>/edit" class="btn btn-warning">ویرایش</a>
+        <a href="/categories/<%= category.id %>/delete" class="btn btn-danger" onclick="return confirm('آيا مطمئن هستید؟')">حذف</a>
+    </div>
+</div>
+<p></p>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>نام</th>
+                <td><%= category.name %></td>
+            </tr>
+            <tr>
+                <th>مسیر</th>
+                <td><%= category.slug %></td>
+            </tr>
+            <tr>
+                <th>توضیحات</th>
+                <td><%= category.description %></td>
+            </tr>
+            <tr>
+                <th>وضعیت</th>
+                <td>
+                    <a href="/categories/<%= category.id %>/active"
+                       class="<%= category.active ? 'text-success' : 'text-danger' %>"><%= category.active ? 'فعال' : 'غیر فعال' %></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

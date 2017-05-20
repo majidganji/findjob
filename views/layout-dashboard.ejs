@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= typeof title == 'undefined' ? 'مدیریت' : title %></title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="/styles/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <!--STYLES END-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">کار پیدا کن!</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard/index">صفحه اصلی</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">پروفایل <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/dashboard/editProfile">ویرایش مشخصات</a></li>
+                        <li><a href="/dashboard/changePassword">تغییر رمز عبور</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/dashboard/logout">خروج</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/">نمایش سایت</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<p></p>
+<div class="page-wrap">
+    <div class="row">
+        <div class="container">
+            <div class="col-sm-3">
+                <div class="list-group admin-dashboard-menu">
+                    <a class="list-group-item" href="/jobs/search">جستجو آگهی ها</a>
+                    <a class="list-group-item" href="/jobs">آگهی ها</a>
+                    <a class="list-group-item" href="/reports">گزارش شده <span class="badge"><%= countReports %></span></a>
+                    <a class="list-group-item" href="/categories">دسته‌بندی</a>
+                    <a class="list-group-item" href="/cities">مدیریت شهر ها</a>
+                    <% if(req.session.admin.status === '10'){ %>
+                    <a class="list-group-item" href="/user">مدیریت کاربران</a>
+                    <% } %>
+                    <a class="list-group-item" href="/contacts">مدیریت تماس باما</a>
+                    <% if(req.session.admin.status === '10'){ %>
+                    <a class="list-group-item" data-toggle="collapse" href="#setting">تنظیمات</a>
+                    <div id="setting" class="collapse">
+                        <a href="/setting/about" class="list-group-item" aria-expanded="true">درباره ما</a>
+                        <a href="/setting/conditions" class="list-group-item" aria-expanded="true">شرایط</a>
+                        <!--<a href="/setting/slider" class="list-group-item" aria-expanded="true">اسلاید شو</a>-->
+                    </div>
+                    <a class="list-group-item" href="/log">log</a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <%
+                var danger = req.flash('admin-danger');
+                if(typeof danger !== 'undefined' && danger.length > 0){
+                %>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger">
+                            <ul class="show-message">
+                                <% _.each(danger, function (item) { %>
+                                <li><%= item %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <%
+                var success = req.flash('admin-success');
+                if(typeof success !== 'undefined' && success.length > 0){
+                %>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="alert alert-success">
+                            <ul class="show-message">
+                                <% _.each(success, function (item) { %>
+                                <li><%= item %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <%- body %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row footer site-footer">
+    <div class="container">
+        <div class="col-sm-12">
+            <p class="pull-right">کلیه حقوق برای شرکت محفوظ است.</p>
+            <p class="pull-left">1396 &copy;</p>
+        </div>
+    </div>
+</div>
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/jquery-2.2.4.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/tinymce/jquery.tinymce.min.js"></script>
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/js/loadDataAjax.js"></script>
+<!--SCRIPTS END-->
+</body>
+</html>

@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <% if(req.cookies.selectedcity){ %>
+            <li><a href="/"><%= req.cookies.selectedcity.name %></a></li>
+            <% }else{ %>
+            <li><a href="/">صفحه اصلی</a></li>
+            <% } %>
+            <li class="active">جستجو</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <form action="/search" method="get">
+            <div class="form-group">
+                <label for="title">عنوان</label>
+                <input type="text" name="title" id="title" class="form-control" value="<%= (old && old.title) || '' %>">
+            </div>
+            <div class="form-group">
+                <label for="city">شهر</label>
+                <select name="city" id="city" class="form-control">
+                    <option value=""></option>
+                    <% city.forEach(function(item){ %>
+                    <option <% if(old && old.city === item.id){%> selected <%}%> value="<%= item.id %>"><%= item.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">دسته‌بندی</label>
+                <select class="form-control" name="category" id="category">
+                    <option value=""></option>
+                    <% category.forEach(function(item){ %>
+                    <option <% if(old && old.category === item.id){%> selected <%}%> value="<%= item.id %>"><%= item.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="جستجو" class="btn btn-success">
+                <input type="reset" value="لغو" class="btn btn-default">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <% if (jobs && jobs.length > 0){ %>
+    <h2>نتیجه جستجو</h2>
+    <% jobs.forEach(function(item){ %>
+    <div class="col-sm-4">
+        <div class="well well-sm">
+            <a href="/detail/<%= item.slug %>/<%= item.id %>" class="link"><h5 class="title"><%= item.title %></h5>
+            </a>
+            <hr>
+            <div class="detail text-muted">
+                <p class="pull-right"><%= item.city ? (item.city.name ? item.city.name : req.cookies.selectedcity.name ) : 'شهر ندارد' %></p>
+                <p class="pull-left"><%= moment(item.createdAt, 'fa').fromNow() %></p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <% }) %>
+    <% } %>
+</div>

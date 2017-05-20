@@ -1,0 +1,46 @@
+<% if(req.cookies.selectedcity){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li class="active"><%= req.cookies.selectedcity.name %></li>
+        </ol>
+    </div>
+</div>
+<% } %>
+<% if(success && success.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            <ul>
+                <% success.forEach(function(item){%>
+                    <li><%= item %></li>
+                <%}) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<div class="row" id="content">
+    <% if (jobs && jobs.length > 0){ %>
+    <% jobs.forEach(function(item){%>
+        <div class="col-sm-4">
+            <div class="well well-sm">
+                <a href="/detail/<%= item.slug %>/<%= item.id %>" class="link"><h5 class="title"><%= item.title %></h5>
+                </a>
+                <hr>
+                <div class="detail text-muted">
+                    <p class="pull-right"><%= item.city ? (item.city.name ? item.city.name : req.cookies.selectedcity.name ) : 'شهر ندارد' %></p>
+                    <p class="pull-left"><%= moment(item.createdAt, 'fa').fromNow() %></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    <%}) %>
+
+    <% }else{ %>
+        <div class="col-sm-12">
+            <div class="alert alert-warning">محتوایی وجود ندارد.</div>
+        </div>
+    <% } %>
+</div>
+<%- '<script>var maxPage = '+ count +';</script>' %>

@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard/index">صفحه اصلی</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<% if(typeof danger !== 'undefined' && danger.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-danger">
+            <ul class="show-message">
+                <% _.each(danger, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<% if(typeof success !== 'undefined' && success.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            <ul class="show-message">
+                <% _.each(success, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/reports/search" class="btn btn-default">جستجو</a>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <% if(typeof models !== 'undefined' && models.length > 0){ %>
+        <table class="table table-responsive table-bordered">
+            <thead>
+            <tr>
+                <th class="col-sm-2">#</th>
+                <th>عنوان</th>
+                <th>آگهی</th>
+                <th class="col-sm-2">وضعیت</th>
+                <th class="col-sm-1"><span class="fa fa-gear"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var index = 1; _.each(models, function (model) { %>
+            <tr>
+                <td><%= index++ %></td>
+                <td><%= model.title %></td>
+                <td>
+                    <a href="/jobs/<%= model.job.id %>/view"><%= model.job.title %></a>
+                </td>
+                <td>
+                    <a href="/reports/<%= model.id %>/status" class="text-<%= model.status ? 'success' : 'danger' %>"><%= model.status ? 'بررسی شده' : 'بررسی نشده' %></a>
+                </td>
+                <td>
+                    <a href="/reports/<%= model.id %>/view" class="text-info" title="نمایش"><span class="fa fa-eye" ></span></a>
+                    <a href="/reports/<%= model.id %>/delete" class="text-danger" title="حذف" onclick="return confirm('آیا مطمئن هستید؟')"><span class="fa fa-trash"></span></a>
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        <% }else{ %>
+        <div class="alert alert-warning">
+            <p>گزارشی وجود ندارد.</p>
+        </div>
+        <% } %>
+    </div>
+</div>
+<% if(count > 1){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <% for(var i = 1; i <= count; i++){ %>
+                <% if(pageId === i){ %>
+                <li class="active"><a href="#"><%= i %></a></li>
+                <% }else{ %>
+                <li><a href="/reports?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% } %>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+<% } %>

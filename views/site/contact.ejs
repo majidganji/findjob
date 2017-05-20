@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <% if(req.cookies.selectedcity){ %>
+            <li><a href="/"><%= req.cookies.selectedcity.name %></a></li>
+            <% }else{ %>
+            <li><a href="/">صفحه اصلی</a></li>
+            <% } %>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+
+<% if (typeof errors !== 'undefined' && errors.length > 0){ %>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-danger">
+            <ul class="show-message">
+                <% errors.forEach(function (item){%>
+                <li><%= item %></li>
+                <%}) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<div class="row">
+    <div class="col-sm-12">
+        <form action="/newContact" method="post">
+            <input type="hidden" name="_csrf" value="<%= _csrf %>">
+            <div class="form-group">
+                <label for="name">نام و نام‌خانوادگی</label>
+                <input type="text" name="name" id="name" class="form-control" value="<%= old && old[0] ? old[0].name : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="email">پست الگترونیکی</label>
+                <input type="text" name="email" id="email" class="form-control" value="<%= old && old[0] ? old[0].email : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="subject">موضوع</label>
+                <input type="text" name="subject" id="subject" class="form-control" value="<%= old && old[0] ? old[0].subject : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="body">پیام</label>
+                <textarea name="body" id="body" class="form-control" rows="10"><%= old && old[0] ? old[0].body : '' %></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="ارسال">
+                <input type="reset" class="btn btn-default" value="لغو">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <% if(req.cookies.selectedcity){ %>
+            <li><a href="/"><%= req.cookies.selectedcity.name %></a></li>
+            <% }else{ %>
+            <li><a href="/">صفحه اصلی</a></li>
+            <% } %>
+            <li><a href="/category/<%= data.category.slug %>"><%= data.category.name %></a></li>
+            <li class="active"><%= data.title %></li>
+        </ol>
+    </div>
+</div>
+<% if(typeof danger !== 'undefined' && danger.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-danger">
+            <ul class="show-message">
+                <% _.each(danger, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<% if(typeof success !== 'undefined' && success.length > 0){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            <ul class="show-message">
+                <% _.each(success, function (item) { %>
+                <li><%= item %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% } %>
+<div class="row">
+    <div class="col-sm-12">
+        <h1><%= data.title %></h1>
+        <div class="text-muted text-small" style="line-height: 2">
+            <p class="pull-right"><%= moment(data.createdAt, 'fa').fromNow() %></p>
+            <a href="#" title="گزارش آگهی" class="btn text-danger pull-left" data-toggle="modal" data-target="#report-modal">گزارش آگهی</a>
+            <div class="clearfix"></div>
+        </div>
+        <div>
+            <p></p>
+            <p class="">شهر: ‌<%= data.city ? data.city.name : '-' %>&nbsp;&nbsp;&nbsp;دسته بندی: <%= data.category ? data.category.name : '-' %></p>
+            <p class="text-muted share">اشتراک گذاری در شبکه های اجتماعی:
+                <a target="_blank" href="https://telegram.me/share/url?url=http://<%= req.headers.host %>/detail/<%= data.slug %>/<%= data.id %>" style="line-height: 1.5" class="btn btn-default text-center btn-xs telegram-color"><span class="fa fa-telegram fa-lg"></span></a>
+                <a href="#" style="line-height: 1.5" class="btn btn-default text-center btn-xs twitter-color"> <span class="fa fa-twitter"></span></a>
+                <a href="#" style="line-height: 1.5" class="btn btn-default text-center btn-xs facebook-color"> <span class="fa fa-facebook"></span></a>
+                <a href="#" style="line-height: 1.5" class="btn btn-default text-center btn-xs google-plus-color"> <span class="fa fa-google-plus"></span></a>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+        <hr>
+        <div>
+            <%- data.description  %>
+        </div>
+        <p>&nbsp;</p>
+        <div>
+            <p>تلفن: <%= data.phone %></p>
+            <p>پست‌الکترونیکی: <%= data.email %></p>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p></p>
+        <div class="well well-sm">
+            <p>ما هیچگونه مسئولیتی در مورد آگهی نداریم.</p>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">گزارش آگهی</h4>
+            </div>
+            <form action="/report" method="post">
+                <input type="hidden" name="_csrf" value="<%= _csrf %>">
+                <input type="hidden" name="post" value="<%= data.id %>">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">عنوان</label>
+                        <input type="text" name="title" id="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">توضیحات</label>
+                        <textarea name="description" id="description" class="form-control" rows="10" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">ارسال گزارش</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

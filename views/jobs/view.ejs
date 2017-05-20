@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">صفحه اصلی</a></li>
+            <li><a href="/jobs">آگهی ها</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/jobs/<%= model.id %>/edit" class="btn btn-warning">ویرایش</a>
+        <a href="/jobs/<%= model.id %>/delete" class="btn btn-danger"
+           onclick="return confirm('آیا مطمئن هستید؟')">حذف</a>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table-responsive table table-bordered">
+            <tr>
+                <th>زمان درج</th>
+                <td><%= moment(model.createdAt, 'fa').fromNow()  %></td>
+            </tr>
+            <tr>
+                <th>بروز رسانی</th>
+                <td><%= moment(model.updatedAt, 'fa').fromNow()  %></td>
+            </tr>
+            <tr>
+                <th>عنوان</th>
+                <td><%= model.title %></td>
+            </tr>
+            <tr>
+                <th>IP</th>
+                <td><%= model.ip %></td>
+            </tr>
+            <tr>
+                <th>شهر</th>
+                <td><%= model.city.name %></td>
+            </tr>
+            <tr>
+                <th>دسته‌بندی</th>
+                <td><%= model.category.name %></td>
+            </tr>
+            <tr>
+                <th>پست الکترونیکی</th>
+                <td><%= model.email %></td>
+            </tr>
+            <tr>
+                <th>تلفن</th>
+                <td><%= model.phone %></td>
+            </tr>
+            <tr>
+                <th>توضیحات</th>
+                <td><%= model.description %></td>
+            </tr>
+            <tr>
+                <th>گزارش ها</th>
+                <td>
+                    <ul class="show-message">
+                        <% _.each(model.report, function(item){ %>
+                        <li>
+                            <a class="text-<%= item.status ? 'success' : 'danger' %>"
+                               href="/reports/<%= item.id %>/view"><%= item.title %></a>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>وضعیت</th>
+                <td>
+                    <a href="/jobs/<%= model.id %>/active"
+                       class="text-<%= model.active ? 'success' : 'danger' %>"><%= model.active ? 'فعال' : 'غیر فعال' %></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

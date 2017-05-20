@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">صفحه اصلی</a></li>
+            <li><a href="/jobs">آگهی ها</a></li>
+            <li class="active">جستجو</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <form action="/jobs/search" method="get">
+            <input type="hidden" value="<%= _csrf %>">
+            <div class="form-group">
+                <label for="IP">IP</label>
+                <input type="text" name="ip" id="IP" class="form-control" value="<%= typeof old !== 'undefined' ? old.ip  : ''  %>">
+            </div>
+            <div class="form-group">
+                <label for="title">عنوان</label>
+                <input type="text" value="<%= typeof old !== 'undefined' ? old.title && '' : ''  %>" name="title" id="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="city">شهر</label>
+                <input type="text" name="city" id="city" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="category">دسته‌بندی</label>
+                <input type="text" name="category" id="category" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">پست‌الکترونیکی</label>
+                <input value="<%= typeof old !== 'undefined' ? old.email && '' : ''  %>" type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="phone">تلفن</label>
+                <input value="<%= typeof old !== 'undefined' ? old.phone && '' : ''  %>" type="text" name="phone" id="phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="active">فعال / غیر فعال</label>
+                <select name="active" id="active">
+                    <option value=""></option>
+                    <option value="0">غیر فعال</option>
+                    <option value="1">فعال</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit"  value="جستجو" class="btn btn-success">
+                <input type="reset" value="لغو" class="btn btn-default">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<% if(typeof models !== 'undefined' && models.length > 0){ %>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-responsive">
+            <thead>
+            <tr>
+                <th class="col-sm-1">#</th>
+                <th>عنوان</th>
+                <th class="col-sm-2">شهر</th>
+                <th class="col-sm-2">دسته‌بندی</th>
+                <th class="col-sm-2">وضعیت</th>
+                <th class="col-sm-1"><span class="fa fa-gear"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var index = 1; %>
+            <% _.each(models, function(model){%>
+            <tr>
+                <td><%= index++ %></td>
+                <td><%= model.title %></td>
+                <td><%= model.city.name %></td>
+                <td><%= model.category.name %></td>
+                <td>
+                    <a href="/jobs/<%= model.id %>/active" class="text-<%= model.active ? 'success' : 'danger' %>"><%= model.active ? 'فعال' : 'غیر فعال' %></a>
+                </td>
+                <td>
+                    <a href="/jobs/<%= model.id %>/view" class="text-info"><span class="fa fa-eye"></span></a>
+                    <a href="/jobs/<%= model.id %>/edit" class="text-warning"><span class="fa fa-edit"></span></a>
+                    <a href="/jobs/<%= model.id %>/delete" onclick="return confirm('آیا مطمئن هستید؟')" class="text-danger"><span class="fa fa-trash"></span></a>
+                </td>
+            </tr>
+            <%}) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% if(count > 1){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <% for(var i = 1; i <= count; i++){ %>
+                <% if(pageId === i){ %>
+                <li class="active"><a href="#"><%= i %></a></li>
+                <% }else{ %>
+                <li><a href="<%= req.url.replace(/&page=\d$/g, '') %>&page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% } %>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+<% } %>
+
+
+<% } %>

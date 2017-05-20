@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">صفحه اصلی</a></li>
+            <li class="active"><%= title %></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="/cities/new" class="btn btn-success">درج شهر جدید</a>
+        <a href="/cities/search" class="btn btn-default">جستجو</a>
+    </div>
+</div>
+<p>&nbsp;</p>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-responsive table-bordered">
+            <thead>
+            <tr>
+                <th class="col-sm-1">#</th>
+                <th>نام</th>
+                <th class="col-sm-2">وضعیت</th>
+                <th class="col-sm-1"><span class="fa fa-gear"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var index = 1; %>
+            <% _.each(models, function(model){ %>
+            <tr>
+                <td><%= index++ %></td>
+                <td><%= model.name %></td>
+                <td>
+                    <a href="/cities/<%= model.id %>/active"
+                       class="<%= model.active ? "text-success" : "text-danger" %>"><%= model.active ? 'فعال' : 'غیر فعال' %></a>
+                </td>
+                <td>
+                    <a href="/cities/<%= model.id %>/delete" class="text-danger" onclick="return confirm('آیا مطمئن هستید؟')"><span class="fa fa-trash"></span></a>
+                    <a href="/cities/<%= model.id %>/edit" class="text-warning"><span class="fa fa-edit"></span></a>
+
+                </td>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% if(count > 1){ %>
+<div class="row">
+    <div class="col-sm-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <% for(var i = 1; i <= count; i++){ %>
+                    <% if(pageid === i){ %>
+                        <li class="active"><a href="#"><%= i %></a></li>
+                    <% }else{ %>
+                        <li><a href="/cities?page=<%= i %>"><%= i %></a></li>
+                    <% } %>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</div>
+<% } %>

@@ -1,0 +1,136 @@
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+@font-face {
+    font-family: 'isans';
+    src: url('../fonts/iransans/IRANSANSExpanded.eot?#') format('eot'),  /* IE6–8 */ url('../fonts/iransans/IRANSans-Bold.woff2') format('woff2'),  /* Chrome36+, Opera24+*/ url('../fonts/iransans/IRANSans-Bold.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    font-weight: bold;
+    font-style: normal;
+}
+
+body{
+    font-family:isans, Arial, sans-serif;
+    font-size: 14px;
+    padding-top: 50px;
+}
+
+/*.navbar{*/
+    /*margin-bottom: 0 !important;*/
+/*}*/
+
+.img-header{
+    direction: ltr;
+    width: 100%;
+}
+.img-header img{
+    width: 100%;
+    margin-top: 0;
+    height: 400px;
+}
+
+.footer{
+    padding-top: 20px;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #333333;
+}
+.title{
+    height: 50px;
+    overflow: hidden;
+
+}
+
+.link,
+.link:hover{
+    text-decoration: none;
+    color: #333;
+}
+.link:hover{
+    color: #565656;
+}
+.text-small{
+    font-size: x-small;
+}
+
+.custom-modal-content{
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    /* inline-block space fix */
+    margin:5px 0;
+}
+
+.share a:not(:first-child){
+    margin-right:10px;
+}
+
+.telegram-color,
+.telegram-color:hover{
+    color: #0088cc;
+}
+.twitter-color,
+.twitter-color:hover {
+    color: #1da1f2;
+}
+
+.facebook-color,
+.facebook-color:hover{
+    color: #3b5998;
+}
+.google-plus-color,
+.google-plus-color:hover{
+    color: #dd4b39;
+}
+.telegram-color:hover,
+.twitter-color:hover,
+.facebook-color:hover,
+.google-plus-color:hover{
+}
+
+/*@-webkit-keyframes floatBubble {*/
+    /*0% {*/
+        /*top:0;*/
+    /*}*/
+    /*100% {*/
+        /*top: -20px;*/
+    /*}*/
+/*}*/
+/*@keyframes floatBubble {*/
+    /*0% {*/
+        /*top:0;*/
+    /*}*/
+    /*100% {*/
+        /*top: -20px;*/
+    /*}*/
+/*}*/
+html, body {
+    height: 100%;
+}
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -50px;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+.site-footer, .page-wrap:after {
+    height: 50px;
+}
+.site-footer {
+    /*background: orange;*/
+}
+
+.show-message > li{
+    display: block;
+}
+.admin-dashboard-menu .collapse .list-group-item:last-child,
+.admin-dashboard-menu .collapse .list-group-item:first-child{
+    margin-bottom:-1px;
+    border-radius: 0px;
+}
+.admin-dashboard-menu .collapse .list-group-item{
+    padding-right:25px;
+}
