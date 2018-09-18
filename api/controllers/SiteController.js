@@ -98,7 +98,10 @@ module.exports = {
             active: true
         }).populate('city').populate('category').exec(function (err, data) {
             if (err) {
-                return next(err);
+                return res.serverError(err);
+            }
+            if(!data){
+                return res.notFound('');
             }
             return res.view({
                 title: data.title,
