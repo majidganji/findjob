@@ -68,27 +68,37 @@ module.exports.routes = {
     '/newContact': 'SiteController.newContact',
     '/conditions': 'SiteController.conditions',
     '/report': 'SiteController.report',
+
     '/categories/:slug/active' : 'CategoriesController.active',
     '/categories/:id/view' : 'CategoriesController.view',
     '/categories/:id/delete' : 'CategoriesController.delete',
     '/categories/:id/edit' : 'CategoriesController.edit',
     '/categories/:id/update' : 'CategoriesController.update',
+
     '/reports/:id/status' : 'ReportsController.status',
     '/reports/:id/view' : 'ReportsController.view',
     '/reports/:id/delete' : 'ReportsController.delete',
+
     '/jobs/:id/active' : 'JobsController.active',
     '/jobs/:id/view' : 'JobsController.view',
     '/jobs/:id/delete' : 'JobsController.delete',
     '/jobs/:id/edit' : 'JobsController.edit',
     '/jobs/:id/update' : 'JobsController.update',
+
     '/cities/:id/active' : 'CitiesController.active',
     '/cities/:id/delete' : 'CitiesController.delete',
     '/cities/:id/edit' : 'CitiesController.edit',
     '/cities/:id/update' : 'CitiesController.update',
+    '/cities/:id/delete' : 'CitiesController.delete',
+    '/cities/new': 'CitiesController.new',
+    '/cities/insert': 'CitiesController.insert',
+
     '/contacts/:id/delete' : 'ContactsController.delete',
     '/contacts/:id/view' : 'ContactsController.view',
+
     '/log/:id/delete' : 'LogController.delete',
-    '/cities/:id/delete' : 'CitiesController.delete',
+
+    
     '/user/:id/edit' : 'UserController.edit',
     '/user/:id/update' : 'UserController.update',
     '/user/:id/delete' : 'UserController.delete',

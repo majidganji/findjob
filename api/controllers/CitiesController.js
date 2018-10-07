@@ -4,6 +4,9 @@
  * @description :: Server-side logic for managing cities
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+
+const slug = require('arslugify');
+
 const LIMIT = 20;
 module.exports = {
     index: function (req, res, next) {
@@ -116,6 +119,28 @@ module.exports = {
                 title: 'جستجو'
             })
         }
+    },
+    new: function(req, res){
+        return res.view({
+            title: 'درج شهر جدید'
+        });
+    },
+    insert: function(req, res){
+        var obj = {
+            name: req.param('name'),
+            active: !!req.param('active')
+        };
+        obj.slug = slug(obj.name);
+        City.create(obj, function (err, data) {
+            if (err) {
+                console.log(err);
+                req.flash('admin-danger', ErrorService.ParseUserErrors(err.Errors));
+                req.flash('old', obj);
+                return res.redirect('/cities/new');
+            }
+            req.flash('admin-success', 'باموفقیت درج شد.');
+            res.redirect('/cities/');
+        })
     }
 };
 
