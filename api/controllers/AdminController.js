@@ -8,28 +8,31 @@
 const bcrypt = require('bcrypt');
 
 module.exports = {
-	signup: function (req, res, next) {
-        return res.view({
-            errors: req.flash('danger'),
-            layout: 'layout-admin'
-        });
+    index: function(req, res){
+        res.send(':)')
     },
-    create: function (req, res, next) {
-        var obj = {
-            name: req.param('name'),
-            username: req.param('username'),
-            email: req.param('email'),
-            password: req.param('password')
-        };
-        Admin.create(obj, function (err, offer) {
-            if(err){
-                req.flash('danger', ErrorService.ParseUserErrors(err.Errors));
-                return res.redirect('/admin/signup');
-            }
-            req.flash('success', 'با موفقیت ثبت شد.');
-            return res.redirect('/admin/signin');
-        });
-    },
+	// signup: function (req, res, next) {
+    //     return res.view({
+    //         errors: req.flash('danger'),
+    //         layout: 'layout-admin'
+    //     });
+    // },
+    // create: function (req, res, next) {
+    //     var obj = {
+    //         name: req.param('name'),
+    //         username: req.param('username'),
+    //         email: req.param('email'),
+    //         password: req.param('password')
+    //     };
+    //     Admin.create(obj, function (err, offer) {
+    //         if(err){
+    //             req.flash('danger', ErrorService.ParseUserErrors(err.Errors));
+    //             return res.redirect('/admin/signup');
+    //         }
+    //         req.flash('success', 'با موفقیت ثبت شد.');
+    //         return res.redirect('/admin/signin');
+    //     });
+    // },
     signin: function (req, res, next) {
         res.view({
             success: req.flash('success'),
